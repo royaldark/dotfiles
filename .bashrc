@@ -97,3 +97,4 @@ fi
 
 # Aliases
 alias ka='killall'
+alias sagi='sudo apt-get install'
