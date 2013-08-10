@@ -1,0 +1,5 @@
+#!/bin/bash
+# Search from the current directory down for all matches of a string in the contents of those files
+
+# Exclude all .directories, and also *.orig files left behind by kdiff3
+grep --color=always -d recurse --exclude-dir='.*/' --exclude '*.orig' "$@" . | less -R

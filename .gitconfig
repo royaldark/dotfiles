@@ -1,0 +1,35 @@
+[alias]
+	co = checkout
+	up = remote update
+	commit-stat = !git log --pretty=format:"%an" | sort | uniq -c
+	upstream = "!f(){ git rev-parse --symbolic-full-name --abbrev-ref $1@{u} 2>/dev/null; }; f"
+	cleanup = "!f(){ UPSTREAM=$(git upstream $1) && git push $(echo $UPSTREAM | sed 's/\\// :/'); git branch -D $1; }; f"
+	whereis = branch --all --contains
+	search = log -S
+	dag = log --oneline --decorate --graph --topo-order
+	dagstat = !git dag --stat
+
+[color]
+	ui = true
+
+[user]
+	name = Joe Einertson
+	email = jeinerts@umm
+
+[push]
+	default = simple
+
+[diff]
+	tool = vimdiff
+	guitool = gvimdiff
+
+[merge]
+	tool = vimdiff
+	renameLimit = 4096
+
+[credential]
+	helper = cache --timeout=1000000
+
+[log]
+	# Display all timestamps in the local timezone
+	date = local
