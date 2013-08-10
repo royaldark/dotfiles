@@ -16,9 +16,6 @@
 	name = Joe Einertson
 	email = jeinerts@umm
 
-[push]
-	default = simple
-
 [diff]
 	tool = vimdiff
 	guitool = gvimdiff
@@ -33,3 +30,6 @@
 [log]
 	# Display all timestamps in the local timezone
 	date = local
+
+[core]
+	editor = vim
