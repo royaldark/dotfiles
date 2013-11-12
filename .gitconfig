@@ -8,7 +8,7 @@
 	search = log -S
 	dag = log --oneline --decorate --graph --topo-order
 	dagstat = !git dag --stat
-  me = !git log --author=`git config user.email`
+	me = !git log --author=`git config user.email`
 
 [color]
 	ui = true
