@@ -162,3 +162,7 @@ alias la='ls -A'                              # all but . and ..
 
 # SSH Agent
 eval `ssh-agent -s`
+
+# Dev Environment
+alias cdc='cd ~/kidblog/client'
+alias cds='cd ~/kidblog/server'
