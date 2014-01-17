@@ -161,7 +161,8 @@ alias la='ls -A'                              # all but . and ..
 # alias cd=cd_func
 
 # SSH Agent
-eval $(~/bin/ssh-pageant -ra /tmp/.ssh-pageant)
+cyg_arch=`getconf LONG_BIT`
+eval $(~/bin/ssh-pageant$cyg_arch -ra /tmp/.ssh-pageant)
 
 # Dev Environment
 alias cdc='cd ~/kidblog/client'
