@@ -4,7 +4,7 @@
 # Dotfiles installation script
 #
 # To run:
-# `wget -O https://raw.githubusercontent.com/royaldark/dotfiles/master/setup.sh | bash`
+# `wget -O - https://raw.githubusercontent.com/royaldark/dotfiles/master/setup.sh | bash`
 #
 
 set -e
@@ -15,12 +15,12 @@ git clone https://github.com/royaldark/dotfiles.git
 
 cd dotfiles
 
-cp -tr .. $(find . -maxdepth 1 -name '.?*')
+cp -r -t .. $(find . -maxdepth 1 -name '.?*')
 
-cp -tr .. bin
+cp -r -t .. bin
 
 case "$(uname -s)" in
 	CYGWIN*)
-		cp -tr .. $(find cygwin/ -maxdepth 1 -name '.?*')
+		cp -r -t .. $(find cygwin/ -maxdepth 1 -name '.?*')
 		;;
 esac
