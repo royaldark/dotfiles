@@ -15,7 +15,7 @@ git clone https://github.com/royaldark/dotfiles.git
 
 cd dotfiles
 
-cp -r -t .. $(find . -maxdepth 1 -name '.?*')
+cp -r -t .. $(find . -maxdepth 1 -name '.?*' -and -not -name '.git')
 
 cp -r -t .. bin
 
