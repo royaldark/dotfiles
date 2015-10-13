@@ -11,7 +11,9 @@
 	dag = log --oneline --decorate --graph --topo-order
 	dagstat = !git dag --stat
 	me = !git log --author=`git config user.email`
-	changes = "!f(){ git diff $1^ $1; }; f"
+	changes = "!f(){ REF=${1:-HEAD}; git diff $REF^ $REF; }; f"
+	amend = !git commit --amend
+	purge = "!f(){ for branch in "$@"; do git branch -d $branch; git push origin :$branch; done; }; f"
 
 [color]
 	ui = true
