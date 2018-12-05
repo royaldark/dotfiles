@@ -1,19 +1,42 @@
 [alias]
+	# Shortcuts
 	co = checkout
 	ca = commit -a
 	ds = diff --stat
 	up = remote update
+	amend = commit --amend
+	staged = diff --staged
+
+	# Branches, pretty
+	b  = branch -vv
+	# Branches, pretty, sorted by most recent
+	br = branch -vv --sort=-committerdate
+	# Echo the top-level directory of the repo
+	root = rev-parse --show-toplevel
+	# Basic analysis of repo authorship
 	commit-stat = !git log --pretty=format:"%an" | sort | uniq -c
-	upstream = "!f(){ git rev-parse --symbolic-full-name --abbrev-ref $1@{u} 2>/dev/null; }; f"
-	cleanup = "!f(){ UPSTREAM=$(git upstream $1) && git push $(echo $UPSTREAM | sed 's/\\// :/'); git branch -D $1; }; f"
+	# What branches contain my current HEAD?
 	whereis = branch --all --contains
+	# Search for commits by diff content
 	search = log -S
+	# Show the log as a dag (vertical graph of branches leading to HEAD)
 	dag = log --oneline --decorate --graph --topo-order
+	# Like dag, but show file diffstats too
 	dagstat = !git dag --stat
+	# Show my commits
 	me = !git log --author=`git config user.email`
-	changes = "!f(){ REF=${1:-HEAD}; git diff $REF^ $REF; }; f"
-	amend = !git commit --amend
+	# Show what changed in HEAD
+	changes = "!f(){ REF=${1:-HEAD}; shift $(( $# > 0 ? 1 : 0 )); git diff $REF^ $REF $@; }; f"
+	# Delete this branch, locally and on my remote
 	purge = "!f(){ for branch in "$@"; do git branch -d $branch; git push origin :$branch; done; }; f"
+	# Squash the last 'n' commits together
+	squash = "!f(){ git reset --soft HEAD~${1} && git commit --edit -m\"$(git log --format=%B --reverse HEAD..HEAD@{1})\"; };f"
+	# Set my current branch's upstream to the same branchname on my remote
+	set-upstream = !git branch --set-upstream-to=origin/`git rev-parse --abbrev-ref HEAD`
+
+	# Clojure formatting helpers
+	cljfmt = !git diff --name-only | grep '.clj$' | xargs -r lein cljfmt fix
+	refmt = !git diff HEAD^ --name-only | grep 'clj$' | xargs -r lein cljfmt fix
 
 [color]
 	ui = true
@@ -43,3 +66,4 @@
 
 [push]
 	default = current
+
